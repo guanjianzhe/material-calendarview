@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Parcel;
@@ -257,6 +258,7 @@ public class MaterialCalendarView extends ViewGroup {
         buttonPast = new DirectionButton(getContext());
         buttonPast.setContentDescription(getContext().getString(R.string.previous));
         title = new TextView(getContext());
+
         buttonFuture = new DirectionButton(getContext());
         buttonFuture.setContentDescription(getContext().getString(R.string.next));
         pager = new CalendarPager(getContext());
@@ -756,6 +758,14 @@ public class MaterialCalendarView extends ViewGroup {
      */
     public void setWeekDayTextAppearance(int resourceId) {
         adapter.setWeekDayTextAppearance(resourceId);
+    }
+
+    /**
+     * @param tf The text typeface
+     */
+    public void setTypeface(Typeface tf) {
+        adapter.setTypeface(tf);
+        title.setTypeface(tf);
     }
 
     /**

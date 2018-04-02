@@ -1,5 +1,6 @@
 package com.prolificinteractive.materialcalendarview;
 
+import android.graphics.Typeface;
 import android.support.annotation.NonNull;
 import android.support.v4.view.PagerAdapter;
 import android.view.View;
@@ -29,6 +30,7 @@ abstract class CalendarPagerAdapter<V extends CalendarPagerView> extends PagerAd
     private Integer color = null;
     private Integer dateTextAppearance = null;
     private Integer weekDayTextAppearance = null;
+    private Typeface typeface = null;
     @ShowOtherDates
     private int showOtherDates = MaterialCalendarView.SHOW_DEFAULTS;
     private CalendarDay minDate = null;
@@ -151,6 +153,9 @@ abstract class CalendarPagerAdapter<V extends CalendarPagerView> extends PagerAd
         if (weekDayTextAppearance != null) {
             pagerView.setWeekDayTextAppearance(weekDayTextAppearance);
         }
+        if (typeface != null) {
+            pagerView.setTypeface(typeface);
+        }
         pagerView.setShowOtherDates(showOtherDates);
         pagerView.setMinimumDate(minDate);
         pagerView.setMaximumDate(maxDate);
@@ -240,6 +245,17 @@ abstract class CalendarPagerAdapter<V extends CalendarPagerView> extends PagerAd
         }
     }
 
+    public void setTypeface(Typeface tf) {
+        if (typeface == null) {
+            return;
+        }
+
+        this.typeface = tf;
+        for (V pagerView : currentViews) {
+            pagerView.setTypeface(tf);
+        }
+    }
+
     public void setRangeDates(CalendarDay min, CalendarDay max) {
         this.minDate = min;
         this.maxDate = max;
@@ -311,6 +327,10 @@ abstract class CalendarPagerAdapter<V extends CalendarPagerView> extends PagerAd
     @NonNull
     public List<CalendarDay> getSelectedDates() {
         return Collections.unmodifiableList(selectedDates);
+    }
+
+    protected Typeface getTypeface() {
+        return typeface;
     }
 
     protected int getDateTextAppearance() {
